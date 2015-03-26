@@ -80,3 +80,30 @@ pre {
 	margin: 0;
 }
 
+container {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.button {
+	color: white;
+	-webkit-transition: color 200ms ease-out;
+	border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+footer {
+	border-top: 1px solid black;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.how-content {
+	font-size: 1.4em;
+}
+
+.clear {
+	clear: both;
+}
