@@ -6,6 +6,9 @@
 // and jade as template engine (http://jade-lang.com/).
 
 var express = require('express');
+var TwitterAPI = require('./twitterapi');
+var twitter = TwitterAPI();
+
 
 // setup middleware
 var app = express();
@@ -18,6 +21,9 @@ app.set('views', __dirname + '/views'); //optional since express defaults to CWD
 // render index page
 app.get('/', function(req, res){
 	res.render('index');
+	var ans = TwitterAPI.greet();
+	console.log(ans);
+	TwitterAPI.count("IBM");
 });
 
 // There are many useful environment variables available in process.env.
