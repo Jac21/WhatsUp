@@ -24,6 +24,7 @@ app.get('/', function(req, res){
 	var ans = TwitterAPI.greet();
 	console.log(ans);
 	TwitterAPI.count("IBM");
+	TwitterAPI.search("Internet of Things", 5);
 });
 
 // There are many useful environment variables available in process.env.

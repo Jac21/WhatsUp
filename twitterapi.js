@@ -29,7 +29,27 @@ TwitterAPI.count = function(query) {
 		}
 	});
 
+}
 
+TwitterAPI.search = function(query, size) {
+	if (typeof(size)==='undefined') size = 10; //size defaults to 10
+	var final_url = insight_url + "search?q=" + query + "&size=" + size;
+
+	var response_body;
+	request(final_url, function(error, response, body) {
+		if (!error && response.statusCode == 200) {
+			response_body = JSON.parse(body);
+
+			var url_list;
+
+			for (i = 0; i < response_body.tweets.length; ++i) {
+				var tweet_url_list = response_body.tweets[i].message.twitter_entities.urls;
+				for (j = 0; j < tweet_url_list.length; ++j) {
+					console.log(tweet_url_list[j].expanded_url);
+				}
+			}
+		}
+	});
 }
 
 TwitterAPI.greet = function() {
