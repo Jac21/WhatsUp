@@ -3,7 +3,7 @@
  */
 
 body,html {
-	background-color: #3b4b54; width : 100%;
+	background-color: #FFFFFF; width : 100%;
 	height: 100%;
 	margin: 0 auto;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -24,7 +24,7 @@ img {
 	display: block;
 	margin: 0 auto;
 	padding-bottom: 2em;
-	max-width:200px;
+	max-width: 200px;
 }
 
 h1 {
@@ -34,7 +34,7 @@ h1 {
 
 .leftHalf {
 	float: left;
-	background-color: #26343f;
+	background-color: #FFFFFF;
 	width: 45%;
 	height: 100%;
 }
@@ -42,22 +42,21 @@ h1 {
 .rightHalf {
 	float: right;
 	width: 55%;
-	background-color: #313f4a;
+	background-color: #FFFFFF;
 	height: 100%;
-	overflow:auto;
+	overflow: auto;
 }
 
 .blue {
 	color: #00aed1;
 }
 
-
 table {
 	table-layout: fixed;
 	width: 800px;
 	margin: 0 auto;
 	word-wrap: break-word;
-	padding-top:10%;
+	padding-top: 10%;
 }
 
 th {
@@ -80,18 +79,18 @@ pre {
 	margin: 0;
 }
 
-container {
+.container {
 	max-width: 1000px;
 	margin: 0 auto;
 }
 
 .button {
-	color: white;
+	color: cornflowerblue;
 	-webkit-transition: color 200ms ease-out;
 	border: none;
-    background: none;
-    cursor: pointer;
-    text-decoration: underline;
+	background: none;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 footer {
@@ -106,4 +105,62 @@ footer {
 
 .clear {
 	clear: both;
+}
+
+.background {
+	fill: #FFFFFF;
+	fill-opacity: 0.01;
+}
+
+.component {
+	fill: #e1e1e1;
+}
+
+.component .label {
+	font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+	text-anchor: middle;
+	fill: #000000;
+}
+
+.negative .arc {
+	stroke-weight: 0.1;
+	fill: #f34d3c
+}
+
+.neutral .arc {
+	stroke-weight: 0.1;
+	fill: #f3cf3c
+}
+
+.mixed .arc {
+	stroke-weight: 0.1;
+	fill: #0099ff
+}
+
+.positive .arc {
+	stroke-weight: 0.1;
+	fill: #78d635;
+}
+
+.arc2 {
+	stroke-weight: 0.1;
+	fill: #3660b0;
+}
+
+.label {
+	font-family: Myriad, "Helvetic Neue", Helvetica, Arial;
+	text-anchor: middle;
+}
+
+.radial-svg {
+	display: block;
+	margin: 0 auto;
+}
+
+.radi {
+	width: 150px;
+	height: 200px;
+	margin-left: 200px;
+	box-sizing: border-box;
+	float: left;
 }
