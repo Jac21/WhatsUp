@@ -106,7 +106,12 @@ html
         for (i = 0; i < testlist.entities.length; i++) {
             elist[i] = document.createElement("DIV");
             document.body.appendChild(elist[i]);
-            elist[i].className = "radi " + testlist.entities[i].sentiment.type;
+            if(testlist.entities[i].sentiment.mixed) {
+                elist[i].className = "radi mixed";
+            }
+            else {
+                elist[i].className = "radi " + testlist.entities[i].sentiment.type;
+            }
         }
     }
 
