@@ -1,0 +1,126 @@
+include mixins
+
+doctype html
+html
+  head
+    title WhatsUp
+    meta( http-equiv='X-UA-Compatible', content='IE=edge' )
+    meta( name='viewport', content='width=device-width, initial-scale=1.0' )
+    meta( name='description', content='Baking Bootstrap Snippets with Jade' )
+    script( type='text/javascript', src='/scripts/radialProgress.js')
+    script( type='text/javascript', src='http://d3js.org/d3.v3.min.js', charset="utf-8")
+    script( src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' )
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+    link(rel="stylesheet", href="/stylesheets/style.css")
+
+    //- Bootswatch Theme
+    +bootswatch("flatly")
+    //link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+    //link(rel='stylesheet', href='bootstrap.min.css')
+  body(style="padding-bottom:10rem;")
+
+      div.container
+          block content
+          nav.navbar.navbar-default( role="navigation" )
+            .navbar-header
+                button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#navbar-inverse", aria-expanded="false", aria-controls="navbar")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(href="#") Menu
+
+            #navbar-inverse.collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li.active: a( href="#") Home
+                    li: a( href="#about" ) About
+                    li: a( href="#contact" ) Contact
+                    li.dropdown
+                        a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Dropdown
+                            span.caret
+                        ul.dropdown-menu( role="menu" )
+                            li: a( href="#" ) Action
+                            li: a( href="#" ) Another action
+                            li: a( href="#" ) Something else here
+                            li.divider
+                            li.dropdown-header Nav header
+                            li: a( href="#" ) Separated link
+                            li: a( href="#" ) One more separated link
+
+          h1 Entity Extraction
+          p Showcase Alchemy API functionality on basic text input
+
+
+          h3 Processed Text
+          //form.form-horizontal(method="post", id="submitForm")
+              label Enter text/URL/#hashtag to parse
+              input.span(id="Text")
+          form(role="form")
+            div.form-group
+                label(for="text") Input Text, a URL, or a #hashtag to see result
+                //type selector
+                .container
+                  #accordion.panel-group
+                      .panel.panel-default
+                          .panel-heading
+                              h4.panel-title
+                                  a(data-toggle='collapse', data-parent='#accordion', href='#collapse1') Load a text sample
+                          #collapse1.panel-collapse.collapse.in
+                              .panel-body
+                                  textarea.form-control(rows='5', name='text_box', placeholder='Enter text here...')
+                                  span.help-block Please enter text you want analyzed in the box above.
+                                  button.btn.btn-default(type='button', onclick='start()') Submit
+
+                      .panel.panel-default
+                          .panel-heading
+                              h4.panel-title
+                                  a(data-toggle='collapse', data-parent='#accordion', href='#collapse2') Load a sample URL
+                          #collapse2.panel-collapse.collapse
+                              .panel-body
+                                  input#text.form-control(type='url', name='url_box', placeholder='Enter url here...')
+                                  span.help-block Please enter a url you want analyzed in the box above.
+                                  button.btn.btn-default Submit
+                      .panel.panel-default
+                          .panel-heading
+                              h4.panel-title
+                                  a(data-toggle='collapse', data-parent='#accordion', href='#collapse3') Load a #hashtag
+                          #collapse3.panel-collapse.collapse
+                              .panel-body
+                                  input(type='text', name='hashtag_box', placeholder='Enter #hashtag here...')
+                                  span.help-block Please enter a #hashtag you want analyzed in the box above.
+                                  button.btn.btn-default Submit
+
+        #div1
+   script(language="JavaScript").
+    document.createElement("button");
+    var elist = [];
+    var testlist = [];
+
+    function parsedata() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "/stylesheets/testinfo.json", false);
+        request.send(null);
+        testlist = JSON.parse(request.responseText);
+        console.log(testlist.entities);
+        var i;
+        for (i = 0; i < testlist.entities.length; i++) {
+            elist[i] = document.createElement("DIV");
+            document.body.appendChild(elist[i]);
+            elist[i].className = "radi " + testlist.entities[i].sentiment.type;
+        }
+    }
+
+    function start() {
+        parsedata();
+        var i;
+        for(i=0; i < elist.length; i++) {
+            radialProgress(elist[i])
+                .label(testlist.entities[i].type+ ": " +testlist.entities[i].text)
+                .diameter(150)
+                .value(testlist.entities[i].relevance*100)
+                .render();
+        }
+        elist=[];
+        testlist=[];
+    }
+
