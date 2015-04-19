@@ -49,6 +49,11 @@ app.get('/', function(req, res){
 	});
 });
 
+app.get('/about', function(req, res) {
+	res.render('about', {
+		title: 'About'
+	});
+});
 
 
 // There are many useful environment variables available in process.env.
