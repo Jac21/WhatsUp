@@ -20,12 +20,26 @@ app.set('views', __dirname + '/views'); //optional since express defaults to CWD
 
 // render index page
 app.get('/', function(req, res){
-	res.render('index');
-	var ans = TwitterAPI.greet();
-	console.log(ans);
-	TwitterAPI.count("IBM");
-	TwitterAPI.search("Internet of Things", 5);
+	var hashtag_input = req.query.hashtag_box;
+	var text_input = req.query.text_box;
+	var url_input = req.query.url_box;
+	console.log(text_input, url_input, hashtag_input);
+	if (hashtag_input !== '') {
+		TwitterAPI.search(hashtag_input, 5, function(returnValue) {
+			res.render('index', {data: returnValue});
+		});
+	} else {
+		res.render('index');
+	}
+	//var ans = TwitterAPI.greet();
+	//console.log(ans);
+	//TwitterAPI.count("IBM");
+	TwitterAPI.search("Internet of Things", 5, function(returnValue) {
+		//console.log(returnValue);
+	});
 });
+
+
 
 // There are many useful environment variables available in process.env.
 // VCAP_APPLICATION contains useful information about a deployed application.
