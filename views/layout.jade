@@ -89,7 +89,7 @@ html
                               .panel-body
                                   input#hashtag_box(type='text', name='hashtag_box', placeholder='Enter #hashtag here...')
                                   span.help-block Please enter a #hashtag you want analyzed in the box above.
-                                  button.btn.btn-default(type='button', onclick='getinput("hashtag_box")') Submit
+                                  button.btn.btn-default Submit
 
         #div1
    script(language="JavaScript").
@@ -135,4 +135,6 @@ html
         elist=[];
         testlist=[];
     }
+    var urls = !{JSON.stringify(url_data)};
+    console.log(urls);
 

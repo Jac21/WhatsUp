@@ -24,9 +24,12 @@ app.get('/', function(req, res){
 	var text_input = req.query.text_box;
 	var url_input = req.query.url_box;
 	console.log(text_input, url_input, hashtag_input);
-	if (hashtag_input !== '') {
-		TwitterAPI.search(hashtag_input, 5, function(returnValue) {
-			res.render('index', {data: returnValue});
+	if (typeof hashtag_input !== 'undefined') {
+		TwitterAPI.search(hashtag_input, 10, function(returnValue) {
+			//foreach in returnValue, put url through Alchemy
+			//gather results of Alchemy calls
+			//pass results to index render
+			res.render('index', {url_data: returnValue});
 		});
 	} else {
 		res.render('index');
