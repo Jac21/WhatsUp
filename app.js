@@ -6,6 +6,10 @@
 // and jade as template engine (http://jade-lang.com/).
 
 var express = require('express');
+
+var AlchemyAPI = require('./alchemyapi');
+var alchemyapi = new AlchemyAPI();
+
 var TwitterAPI = require('./twitterapi');
 var twitter = TwitterAPI();
 
@@ -24,7 +28,10 @@ app.get('/', function(req, res){
 	var text_input = req.query.text_box;
 	var url_input = req.query.url_box;
 	console.log(text_input, url_input, hashtag_input);
-	if (typeof hashtag_input !== 'undefined') {
+	if (typeof text_input !== 'undefined') {
+			example(text_input);
+			res.render('index');
+	} else if (typeof hashtag_input !== 'undefined') {
 		TwitterAPI.search_text(hashtag_input, 10, function(returnValue) {
 			//foreach in returnValue, put url through Alchemy
 			//gather results of Alchemy calls
@@ -79,8 +86,9 @@ function example(req, res) {
 }
 
 function entities(req, res, output) {
-	alchemyapi.entities('text', demo_text, {'sentiment':1}, function(response) {
-		output['entities'] = {text:demo_text, response:JSON.stringify(response, null, 4), results:response['entities'] }
+	alchemyapi.entities('text', req, {'sentiment':1}, function(response) {
+		output['entities'] = {text:req, response:JSON.stringify(response, null, 4), results:response['entities'] }
+		console.log(output['entities']);
 	})
 }
 
