@@ -31,7 +31,7 @@ TwitterAPI.count = function(query) {
 
 }
 
-TwitterAPI.search = function(query, size, callback) {
+TwitterAPI.search_urls = function(query, size, callback) {
 	if (typeof(size)==='undefined') size = 10; //size defaults to 10
 	var final_url = insight_url + "search?q=" + query + "&size=" + size;
 
@@ -57,7 +57,25 @@ TwitterAPI.search = function(query, size, callback) {
 		}
 		callback(url_list);
 	});
+}
 
+TwitterAPI.search_text = function(query, size, callback) {
+	if (typeof(size)==='undefined') size = 10; //size defaults to 10
+	var final_url = insight_url + "search?q=" + query + "&size=" + size;
+
+	var response_body;
+	var text_list = [];
+	request(final_url, function(error, response, body) {
+		if (!error && response.statusCode == 200) {
+			response_body = JSON.parse(body);
+
+			for (i = 0; i < response_body.tweets.length; ++i) {
+				var tweet_text = response_body.tweets[i].message.body;
+				text_list.push(tweet_text);
+			}
+		}
+		callback(text_list);
+	});
 }
 
 TwitterAPI.greet = function() {

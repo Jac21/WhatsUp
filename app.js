@@ -25,7 +25,7 @@ app.get('/', function(req, res){
 	var url_input = req.query.url_box;
 	console.log(text_input, url_input, hashtag_input);
 	if (typeof hashtag_input !== 'undefined') {
-		TwitterAPI.search(hashtag_input, 10, function(returnValue) {
+		TwitterAPI.search_text(hashtag_input, 10, function(returnValue) {
 			//foreach in returnValue, put url through Alchemy
 			//gather results of Alchemy calls
 			//pass results to index render
@@ -37,7 +37,7 @@ app.get('/', function(req, res){
 	//var ans = TwitterAPI.greet();
 	//console.log(ans);
 	//TwitterAPI.count("IBM");
-	TwitterAPI.search("Internet of Things", 5, function(returnValue) {
+	TwitterAPI.search_text("Internet of Things", 5, function(returnValue) {
 		//console.log(returnValue);
 	});
 });
