@@ -1,17 +1,12 @@
-This README.md file is displayed on your project page. You should edit this 
-file to describe your project, including instructions for building and 
-running the project, pointers to the license under which you are making the 
-project available, and anything else you think would be useful for others to
-know.
+![alt-text](http://i.imgur.com/LJN2IjL.png "WhatsUp")
 
-We have created an empty license.txt file for you. Well, actually, it says,
-"<Replace this text with the license you've chosen for your project.>" We 
-recommend you edit this and include text for license terms under which you're
-making your code available. A good resource for open source licenses is the 
-[Open Source Initiative](http://opensource.org/).
+Our "mashup-style" simple solution to obtaining the "sentiment" of your chosen topics from a block of text, news article or story (in the form of a URL), or the Twitter-sphere's current opinion. Results are displayed in an easy to read format, showcasing the types of "entities" processed, the relevance to the input as a whole, and the overall sentiment of that entity, ranging from green (positive) to red (negative). 
 
-Be sure to update your project's profile with a short description and 
-eye-catching graphic.
+## How to Use
+1. [Visit our page.](https://438testapp.mybluemix.net/)
+2. Select the input type you desire from the three available
+3. Input your plain-text, URL, or #hashtag (without the#).
+4. Click "Submit" to send the data through our back-end.
+5. Open your particular input type once more and click "Analyze and Output" to showcase your results in an graphical manner.
 
-Finally, consider defining some sprints and work items in Track & Plan to give 
-interested developers a sense of your cadence and upcoming enhancements.
+![alt-text](http://i.imgur.com/pjuGoHH.png "Usage")
