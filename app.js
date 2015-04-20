@@ -162,11 +162,25 @@ function entities_url(req, res, output) {
 	});
 }
 
+//for tweet url_list object conversion
+function objToString (obj) {
+	var str = '';
+	for (var p in obj) {
+		if (obj.hasOwnProperty(p)) {
+			str += p + '::' + obj[p] + '\n';
+		}
+	}
+	return str;
+}
+
 //entity extraction for entity, type, relevance, and overall sentiment
 function entities_tweets(req, res, output) {
 	console.log('entities for tweets called...');
-	alchemyapi.entities('text', req, {'sentiment':1}, function(response) {
-		output['entities'] = {text:req, response:JSON.stringify(response, null, 4), results:response['entities'] }
+
+	var tweet_string = objToString(req);
+
+	alchemyapi.entities('text', tweet_string, {'sentiment':1}, function(response) {
+		output['entities'] = {text:tweet_string, response:JSON.stringify(response, null, 4), results:response['entities'] }
 		console.log(JSON.stringify(output['entities'], null, 4));
 
 		//json object
@@ -178,7 +192,7 @@ function entities_tweets(req, res, output) {
 		} else {
 			fs.writeFile('public/test_results_tweets.json', JSON.stringify(output['entities'], null, 4), function (err) {
 				if (err) return console.log(err);
-				console.log('test_results written with JSON\n');
+				console.log('test_results tweets written with JSON\n');
 			});
 		}
 	});
