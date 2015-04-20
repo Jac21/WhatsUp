@@ -48,6 +48,8 @@ app.get('/', function(req, res){
 			console.log(hashtag_input);
 			TwitterAPI.search_text(hashtag_input, 10, function(returnValue) {
 				res.render('index', {url_data: returnValue});
+				//console.log({url_data: returnValue});
+				example_tweets({url_data: returnValue});
 			});
 		}
 		console.log(text_input);
@@ -111,6 +113,12 @@ function example_url(req, res) {
 	entities_url(req, res, output);
 }
 
+function example_tweets(req, res) {
+	var output = {};
+
+	entities_tweets(req, res, output);
+}
+
 //entity extraction for entity, type, relevance, and overall sentiment
 function entities(req, res, output) {
 	console.log('entities for basic text called...');
@@ -149,6 +157,28 @@ function entities_url(req, res, output) {
 			fs.writeFile('public/test_results_url.json', JSON.stringify(output['entities'], null, 4), function (err) {
 				if (err) return console.log(err);
 				console.log('test_results_url written with JSON\n');
+			});
+		}
+	});
+}
+
+//entity extraction for entity, type, relevance, and overall sentiment
+function entities_tweets(req, res, output) {
+	console.log('entities for tweets called...');
+	alchemyapi.entities('text', req, {'sentiment':1}, function(response) {
+		output['entities'] = {text:req, response:JSON.stringify(response, null, 4), results:response['entities'] }
+		console.log(JSON.stringify(output['entities'], null, 4));
+
+		//json object
+		var entry_text = JSON.parse(JSON.stringify(output['entities'], null, 4));
+
+		//make sure entry was called before writing to particular file
+		if (entry_text.text == "") {
+			console.log("Nothing to write to text file...");
+		} else {
+			fs.writeFile('public/test_results_tweets.json', JSON.stringify(output['entities'], null, 4), function (err) {
+				if (err) return console.log(err);
+				console.log('test_results written with JSON\n');
 			});
 		}
 	});
