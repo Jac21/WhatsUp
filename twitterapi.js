@@ -6,8 +6,8 @@
 var http = require('http');
 var fs = require('fs');
 var request = require('request');
-var twitter_insights_username = "db3ef214313c6439b79e75a56f79af58";
-var twitter_insights_password = "iecnDI2yyt"; //don't track this in git, fill in later
+var twitter_insights_username = "";
+var twitter_insights_password = ""; //don't track this in git, fill in later
 var insight_url = "https://" +
                   twitter_insights_username + ":" +
                   twitter_insights_password +
